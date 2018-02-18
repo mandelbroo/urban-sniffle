@@ -1,16 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
-import { getUser } from '../js/actions/users'
 
 export default class UserTile extends React.Component {
-  componentWillReceiveProps = (newProps) => {
-    const user = this.props.user
-    if (user && user.login && user.public_repos === undefined) {
-      this.props.dispatch(getUser(user.login))
-    }
-  }
-
   render = () => {
     const user = this.props.user || {}
     return (

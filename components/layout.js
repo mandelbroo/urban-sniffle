@@ -3,9 +3,27 @@ import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import SearchBox from './search-box'
 import UsersList from './users-list'
-import { searchUsers } from '../js/actions/users'
+import { getUser, searchUsers } from '../js/actions/users'
 
 class Layout extends React.Component {
+  state = { loadingDetails: false }
+
+  loadDetails = (propsState) => {
+    if (propsState.users.length > 0 && !this.state.loadingDetails) {
+      this.setState({ loadingDetails: true })
+      const promises = propsState.users
+        .map(user => {
+          const action = getUser(user.login)
+          this.props.dispatch(action)
+          return action.payload
+        })
+      Promise.all(promises).then(() =>
+        this.setState({ loadingDetails: false }))
+    }
+  }
+
+  componentWillReceiveProps = this.loadDetails
+
   change = (username) => {
     if (username) {
       this.props.dispatch(searchUsers(username))
