@@ -2,7 +2,7 @@ export default (
   state = {
     loading: false,
     loaded: false,
-    users: [{ login: 'blank-user' }],
+    users: [],
     error: null
   },
   action
