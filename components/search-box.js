@@ -15,8 +15,9 @@ export default class SearchBox extends React.Component {
   render = () => (
     <View style={ styles.wrapper }>
       <Text style={ styles.icon }>🔍</Text>
-      <TextInput style={ styles.input } onChangeText={ this.change }
-        placeholder='Username' />
+      <TextInput style={ styles.input } placeholder='Username' 
+        onChangeText={ this.change }
+        onSubmitEditing={ this.click } />
       { this.button }
     </View>
   )
