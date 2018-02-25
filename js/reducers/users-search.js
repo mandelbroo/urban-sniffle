@@ -43,6 +43,6 @@ export default (
       }
       break
     default:
+      return state
   }
-  return state
 }
